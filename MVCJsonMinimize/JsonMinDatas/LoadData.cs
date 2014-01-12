@@ -88,6 +88,7 @@ namespace JsonMinDatas
                 }
                 ret.Add(d);
             }
+            ret.First().Employees.Insert(0,new Employee() { LastName = "Ignat", FirstName = "Andrei", ManagerName = "Knowledge" });
             return ret;
         }
         public static List<DSmall> Minimize(List<Department> d)

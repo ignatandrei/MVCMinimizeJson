@@ -14,39 +14,42 @@
         <p>
             <a href="javascript:ShowEmployees()">Show Departments and Employees full data</a>
         </p>
-        <div>
-            <div data-bind="foreach: departments">
-                <h3 data-bind="text: NameDepartment"></h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Manager Name</th>
-
-                        </tr>
-                    </thead>
-                    <tbody data-bind="template: { name: 'employeeTemplate',
-                                  foreach: Employees,
-                                  as: 'employee' }"></tbody>
-                </table>
-
-
-            </div>
-
-        </div>
+        
 
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>Start fiddler and press buttons</h2>
+        <p>
+            <a href="javascript:ShowEmployeesMin()">Show Departments and Employees full data - transfer minimized</a>
+        </p>
     </div>
     <div class="col-md-4">
         <h2>Web Hosting</h2>
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
+</div>
+
+<div>
+    <div data-bind="foreach: departments">
+        <h3 data-bind="text: NameDepartment"></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Manager Name</th>
+
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: 'employeeTemplate',
+                                  foreach: Employees,
+                                  as: 'employee' }"></tbody>
+        </table>
+
+
+    </div>
+
 </div>
 @section scripts{
     <script type="text/html" id="employeeTemplate">
@@ -64,9 +67,54 @@
         </tr>
     </script>
     <script>
+        function createObjectMapped(minObject, dictProp) {
+            var obj = new Object();
+            
+            for (var prop in dictProp) {
 
+                obj[dictProp[prop]] = minObject[prop];
 
+            }
+            return obj;
+        }
+        function ShowEmployeesMin() {
+            
+            var urlEmp = '@Url.Content("~/Home/RequestEmployeesMinimizing")';
+            $.ajax({
+                type: "POST",
+                url: urlEmp,
+                data: null,
+                datatype: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function (returndata) {
+                    if (returndata.ok) {
+                        window.alert("Departments transferred: " + returndata.departmentsMin.length);
+                        returndata.departments = [];
+                        $.each(returndata.departmentsMin,function(index, departmentMin)
+                        {
+                            var dep = createObjectMapped(departmentMin, returndata.dDep);
+                            //mapping employees of the department
+                            dep.Employees = [];
+                            $.each(departmentMin.E, function (index, employeeMin) {
+                                dep.Employees.push(createObjectMapped(employeeMin, returndata.dEmp));
+                            });
+                            returndata.departments.push(dep);
+
+                        });
+
+                        ko.applyBindings(returndata);
+
+                    }
+                    else {
+
+                        window.alert(' error : ' + returndata.message);
+                    }
+
+                }
+            });
+        }
         function ShowEmployees() {
+            
             var urlEmp = '@Url.Content("~/Home/RequestEmployees")';
             $.ajax({
                 type: "POST",
