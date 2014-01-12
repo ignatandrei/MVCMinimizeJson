@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Json Minimized</h1>
+    <p class="lead">Show an example of json minimzed</p>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Start fiddler and press buttons</h2>
+        <p>
+            <a href="javascript:ShowEmployees()">Show Departments and Employees full data</a>
+        </p>
+        <div>
+            <div data-bind="foreach: departments">
+                <h3 data-bind="text: NameDepartment"></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Manager Name</th>
+
+                        </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'employeeTemplate',
+                                  foreach: Employees,
+                                  as: 'employee' }"></tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+@section scripts{
+    <script type="text/html" id="employeeTemplate">
+        <tr>
+            <td>
+                <span data-bind="text: employee.FirstName"></span>
+            </td>
+            <td>
+                <span data-bind="text: employee.LastName"></span>
+            </td>
+            <td>
+
+                <span data-bind="text: employee.ManagerName"></span>
+            </td>
+        </tr>
+    </script>
+    <script>
+
+
+        function ShowEmployees() {
+            var urlEmp = '@Url.Content("~/Home/RequestEmployees")';
+            $.ajax({
+                type: "POST",
+                url: urlEmp,
+                data: null,
+                datatype: "JSON",
+                contentType: "application/json; charset=utf-8",
+                success: function (returndata) {
+                    if (returndata.ok) {
+                        window.alert("Departments transferred: " + returndata.departments.length);
+                        ko.applyBindings(returndata);
+
+                    }
+                    else {
+
+                        window.alert(' error : ' + returndata.message);
+                    }
+
+                }
+            });
+        }
+
+
+    </script>
+}

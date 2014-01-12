@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonMinDatas", "JsonMinData
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonMinConsole", "JsonMinConsole\JsonMinConsole.csproj", "{67A59B05-E313-479F-A3E8-F0440ACBCA6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonMinWeb", "JsonMinWeb\JsonMinWeb.csproj", "{5088B4FB-1C0B-46B3-8571-E60114BAE7F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{67A59B05-E313-479F-A3E8-F0440ACBCA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A59B05-E313-479F-A3E8-F0440ACBCA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A59B05-E313-479F-A3E8-F0440ACBCA6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5088B4FB-1C0B-46B3-8571-E60114BAE7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5088B4FB-1C0B-46B3-8571-E60114BAE7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5088B4FB-1C0B-46B3-8571-E60114BAE7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5088B4FB-1C0B-46B3-8571-E60114BAE7F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

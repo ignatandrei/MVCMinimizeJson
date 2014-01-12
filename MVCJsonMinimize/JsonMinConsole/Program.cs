@@ -38,7 +38,7 @@ namespace JsonMinConsole
 
             Console.WriteLine("Jss:{0}, XML:{1}", nrJss, nrXML); 
             
-            var min = ld.Minimize(d);
+            var min = LoadData.Minimize(d);
             #region xml
             ser = new XmlSerializer(typeof(List<DSmall>));
             sb.Clear();            
