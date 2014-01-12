@@ -59,6 +59,7 @@ namespace JsonMinConsole
             
             Console.WriteLine("Jss:{0}, XML:{1}", nrJss2, nrXML2);
             Console.WriteLine("Percent Jss:{0}, PercentXML:{1}", PercentLoss(nrJss, nrJss2), PercentLoss(nrXML, nrXML2));
+            Console.WriteLine("Example from Andrei Ignat, http://msprogrammer.serviciipeweb.ro/");
             
         }
         
